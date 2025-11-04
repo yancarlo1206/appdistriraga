@@ -21530,4 +21530,9 @@ button:focus,
   margin-right: 10px;
 }
 
+.bg-gradient-custom {
+  background: linear-gradient(87deg, #C7A0E8 0%, #B085F5 100%) !important;
+}
+
+
 /*# sourceMappingURL=argon-dashboard-react.css.map */

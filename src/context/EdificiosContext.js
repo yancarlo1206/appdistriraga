@@ -40,39 +40,45 @@ const EdificiosProvider = ({children}) => {
 
     const fetchDataEdificio = () => {
         setLoading(true);
-
         let data = [
-            {
-                id: 1,
-                nombre: "La Playa",
-                direccion: "Direccion 1",
-                ciudad: "Ciudad 1",
-                ubicacion: "Ubicacion 1",
-                administrador: "Administrador 1",
-                celular: "Celular 1",
-                observacion: "Observacion 1"
-            },
-            {
-                id: 2,
-                nombre: "El Faro",
-                direccion: "Direccion 2",
-                ciudad: "Ciudad 2",
-                ubicacion: "Ubicacion 2",
-                administrador: "Administrador 2",
-                celular: "Celular 2",
-                observacion: "Observacion 2"
-            },
-            {
-                id: 3,
-                nombre: "San Agustin",
-                direccion: "Direccion 3",
-                ciudad: "Ciudad 3",
-                ubicacion: "Ubicacion 3",
-                administrador: "Administrador 3",
-                celular: "Celular 3",
-                observacion: "Observacion 3"
-            }
-        ]
+  {
+    id: 1,
+    nombre: "Torre Santander",
+    direccion: "Avenida 4 #12-45",
+    ciudad: "Cúcuta",
+    ubicacion: "Zona Centro",
+    administrador: "Julián Rodríguez",
+    celular: "3104567890",
+    fecha: "2024-01-15",
+    estado: "Activo",
+    observacion: "Edificio moderno con 10 pisos, parqueadero cubierto y gimnasio."
+  },
+  {
+    id: 2,
+    nombre: "Conjunto Los Almendros",
+    direccion: "Calle 8 #23-60",
+    ciudad: "El Zulia",
+    ubicacion: "Barrio La Primavera",
+    administrador: "Paola Guerrero",
+    celular: "3019876543",
+    fecha: "2024-02-10",
+    estado: "Inactivo",
+    observacion: "Actualmente en remodelación de zonas comunes y fachada."
+  },
+  {
+    id: 3,
+    nombre: "Residencias El Mirador",
+    direccion: "Carrera 6 #15-20",
+    ciudad: "Los Patios",
+    ubicacion: "Sector La Sabana",
+    administrador: "Andrés Carvajal",
+    celular: "3201234567",
+    fecha: "2024-03-05",
+    estado: "Activo",
+    observacion: "Cuenta con vista panorámica, zona verde y portería 24 horas."
+  }
+];
+
 
         dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
         setLoading(false);

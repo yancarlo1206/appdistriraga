@@ -41,38 +41,39 @@ const CotizacionProvider = ({children}) => {
     const fetchDataCotizacion = () => {
         setLoading(true);
 
-        let data = [
-            {
-                id: 1,
-                nombre: "La Playa",
-                direccion: "Direccion 1",
-                ciudad: "Ciudad 1",
-                ubicacion: "Ubicacion 1",
-                administrador: "Administrador 1",
-                celular: "Celular 1",
-                observacion: "Observacion 1"
-            },
-            {
-                id: 2,
-                nombre: "El Faro",
-                direccion: "Direccion 2",
-                ciudad: "Ciudad 2",
-                ubicacion: "Ubicacion 2",
-                administrador: "Administrador 2",
-                celular: "Celular 2",
-                observacion: "Observacion 2"
-            },
-            {
-                id: 3,
-                nombre: "San Agustin",
-                direccion: "Direccion 3",
-                ciudad: "Ciudad 3",
-                ubicacion: "Ubicacion 3",
-                administrador: "Administrador 3",
-                celular: "Celular 3",
-                observacion: "Observacion 3"
-            }
-        ]
+       let data = [
+  {
+    id: 1,
+    fecha: "2025-11-03",
+    usuario: "Juan Pérez",
+    apartamento: "Torre A - 302",
+    precio: "$2.500.000",
+    tipo: "Reparación eléctrica",
+    observacion: "Incluye cambio de cableado y revisión de tomas.",
+    estado: "Pendiente"
+  },
+  {
+    id: 2,
+    fecha: "2025-11-02",
+    usuario: "María Gómez",
+    apartamento: "Edificio Sol - 204",
+    precio: "$3.200.000",
+    tipo: "Pintura interior",
+    observacion: "Pintura lavable color blanco marfil en sala y comedor.",
+    estado: "Aprobada"
+  },
+  {
+    id: 3,
+    fecha: "2025-10-30",
+    usuario: "Carlos López",
+    apartamento: "Conjunto Oasis - 101",
+    precio: "$1.850.000",
+    tipo: "Mantenimiento de plomería",
+    observacion: "Cambio de grifos y revisión de fugas en baño.",
+    estado: "Rechazada"
+  }
+];
+
 
         dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
         setLoading(false);

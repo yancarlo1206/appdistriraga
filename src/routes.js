@@ -33,14 +33,14 @@ import Espacios from "views/pages/espacios/Index";
 import Clientes from "views/pages/clientes/Index";
 
 var routes = [
-  {
+  /*{
     path: "/index",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-danger",
     component: <Index />,
     layout: "/admin",
   },
-  /*{
+  {
     path: "/venta",
     name: "Venta",
     icon: "ni ni-cart text-success",
@@ -53,8 +53,8 @@ var routes = [
     icon: "ni ni-cart text-success",
     component: <Compra />,
     layout: "/admin",
-  },*/
-  /*{
+  },
+  {
     path: "/articulo",
     name: "Articulo",
     icon: "ni ni-tag text-success",
@@ -64,39 +64,39 @@ var routes = [
   {
     path: "/cotizacion",
     name: "Cotizacion",
-    icon: "ni ni-tag text-success",
+    icon: "ni ni-credit-card text-success",
     component: <Cotizacion />,
     layout: "/admin",
   },
   {
     path: "/edificios",
     name: "Edificios",
-    icon: "ni ni-tag text-success",
+    icon: "fa fa-city text-primary",
     component: <Edificios />,
     layout: "/admin",
   },
   {
     path: "/apartamentos",
     name: "Apartamentos",
-    icon: "ni ni-tag text-success",
+    icon: "ni ni-building text-primary",
     component: <Apartamentos />,
     layout: "/admin",
   },
   {
     path: "/espacios",
     name: "Espacios",
-    icon: "ni ni-tag text-success",
+    icon: "fa fa-ruler text-warning",
     component: <Espacios />,
     layout: "/admin",
   },
   {
     path: "/clientes",
     name: "Clientes",
-    icon: "ni ni-tag text-success",
+    icon: "fa fa-users text-info",
     component: <Clientes />,
     layout: "/admin",
   },
-  {
+  /*{
     path: "/proveedor",
     name: "Proveedor",
     icon: "ni ni-delivery-fast text-primary",
@@ -117,7 +117,7 @@ var routes = [
     component: <Usuario />,
     layout: "/admin",
   },
-  /*{
+  {
     path: "/caracteristica",
     name: "Caracteristica",
     icon: "ni ni-collection text-primary",

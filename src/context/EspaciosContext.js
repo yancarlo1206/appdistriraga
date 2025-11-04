@@ -42,37 +42,37 @@ const EspaciosProvider = ({children}) => {
         setLoading(true);
 
         let data = [
-            {
-                id: 1,
-                nombre: "La Playa",
-                direccion: "Direccion 1",
-                ciudad: "Ciudad 1",
-                ubicacion: "Ubicacion 1",
-                administrador: "Administrador 1",
-                celular: "Celular 1",
-                observacion: "Observacion 1"
-            },
-            {
-                id: 2,
-                nombre: "El Faro",
-                direccion: "Direccion 2",
-                ciudad: "Ciudad 2",
-                ubicacion: "Ubicacion 2",
-                administrador: "Administrador 2",
-                celular: "Celular 2",
-                observacion: "Observacion 2"
-            },
-            {
-                id: 3,
-                nombre: "San Agustin",
-                direccion: "Direccion 3",
-                ciudad: "Ciudad 3",
-                ubicacion: "Ubicacion 3",
-                administrador: "Administrador 3",
-                celular: "Celular 3",
-                observacion: "Observacion 3"
-            }
-        ]
+  {
+    id: 1,
+    nombre: "Sala Principal",
+    alto: "2.8 m",
+    ancho: "4.5 m",
+    factor: "1.2",
+    precio: "$1.200.000",
+    celular: "3001234567",
+    observacion: "Espacio amplio con buena iluminación natural."
+  },
+  {
+    id: 2,
+    nombre: "Cocina Integral",
+    alto: "2.5 m",
+    ancho: "3.2 m",
+    factor: "1.0",
+    precio: "$950.000",
+    celular: "3109876543",
+    observacion: "Incluye gabinetes superiores y zona de lavado."
+  },
+  {
+    id: 3,
+    nombre: "Balcón",
+    alto: "2.6 m",
+    ancho: "2.8 m",
+    factor: "0.8",
+    precio: "$600.000",
+    celular: "3014567890",
+    observacion: "Vista panorámica hacia el conjunto residencial."
+  }
+];
 
         dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
         setLoading(false);

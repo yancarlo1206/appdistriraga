@@ -29,10 +29,10 @@ function List({ tab }) {
   const columns = [
     { name: "ID", selector: row => row.id, sortable: true, width: "100px" },
     { name: "Nombre", selector: row => row.nombre, sortable: true },
-    { name: "Direccion", selector: row => row.direccion, sortable: true },
-    { name: "Ciudad", selector: row => row.ciudad, sortable: true },
-    { name: "Administrador", selector: row => row.administrador, sortable: true },
-    { name: "Celular", selector: row => row.celular, sortable: true },
+    { name: "Alto", selector: row => row.alto, sortable: true },
+    { name: "Ancho", selector: row => row.ancho, sortable: true },
+    { name: "Factor", selector: row => row.factor, sortable: true },
+    { name: "Precio", selector: row => row.precio, sortable: true },
     { name: "Acciones", width: "200px", cell: row => (
       <> 
       <Link className='btn btn-primary btn-sm'

@@ -10,36 +10,36 @@ export const validationsForm = (form) => {
         errores.nombre = "";
     }
 
-    if (!form.direccion) {
-        errores.direccion = "Please the field is required.";
-    } else if (!regexText40.test(form.direccion.trim())) {
-        errores.direccion = "The field accepts up to 40 characters.";
+    if (!form.alto) {
+        errores.alto = "Please the field is required.";
+    } else if (!regexText40.test(form.alto.trim())) {
+        errores.alto = "The field accepts up to 40 characters.";
     } else{
-        errores.direccion = "";
+        errores.alto = "";
     }
 
-    if (!form.ciudad) {
-        errores.ciudad = "Please the field is required.";
-    } else if (!regexText40.test(form.ciudad.trim())) {
-        errores.ciudad = "The field accepts up to 40 characters.";
+    if (!form.ancho) {
+        errores.ancho = "Please the field is required.";
+    } else if (!regexText40.test(form.ancho.trim())) {
+        errores.ancho = "The field accepts up to 40 characters.";
     } else{
-        errores.ciudad = "";
+        errores.ancho = "";
     }
 
-    if (!form.ubicacion) {
-        errores.ubicacion = "Please the field is required.";
-    } else if (!regexText40.test(form.ubicacion.trim())) {
-        errores.ubicacion = "The field accepts up to 40 characters.";
+    if (!form.factor) {
+        errores.factor = "Please the field is required.";
+    } else if (!regexText40.test(form.factor.trim())) {
+        errores.factor = "The field accepts up to 40 characters.";
     } else{
-        errores.ubicacion = "";
+        errores.factor = "";
     }
 
-    if (!form.administrador) {
-        errores.administrador = "Please the field is required.";
-    } else if (!regexText40.test(form.administrador.trim())) {
-        errores.administrador = "The field accepts up to 40 characters.";
+    if (!form.precio) {
+        errores.precio = "Please the field is required.";
+    } else if (!regexText40.test(form.precio.trim())) {
+        errores.precio = "The field accepts up to 40 characters.";
     } else{
-        errores.administrador = "";
+        errores.precio = "";
     }
 
     if (!form.celular) {
