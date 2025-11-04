@@ -6,9 +6,9 @@ import NotificationContext from "context/NotificationContext";
 import LoadingContext from "context/LoadingContext";
 import { useNavigate } from "react-router";
 
-const UsuarioContext = createContext();
+const EspaciosContext = createContext();
 
-const UsuarioProvider = ({children}) => {
+const EspaciosProvider = ({children}) => {
 
     const [toDetail, setToDetail] = useState();
     const [toUpdate, setToUpdate] = useState();
@@ -25,10 +25,11 @@ const UsuarioProvider = ({children}) => {
     const { db } = state;
 
     let api = helpHttp();
-    let url = REACT_APP_API_URL+"usuario";
+    let url = REACT_APP_API_URL+"espacios";
 
     useEffect(() => {
-        fetchData();
+        //fetchData();
+        fetchDataEspacios();
     },[]);
 
     useEffect(() => {
@@ -36,6 +37,46 @@ const UsuarioProvider = ({children}) => {
             fetchDataDetail();
         }
     },[toUpdate]);
+
+    const fetchDataEspacios = () => {
+        setLoading(true);
+
+        let data = [
+            {
+                id: 1,
+                nombre: "La Playa",
+                direccion: "Direccion 1",
+                ciudad: "Ciudad 1",
+                ubicacion: "Ubicacion 1",
+                administrador: "Administrador 1",
+                celular: "Celular 1",
+                observacion: "Observacion 1"
+            },
+            {
+                id: 2,
+                nombre: "El Faro",
+                direccion: "Direccion 2",
+                ciudad: "Ciudad 2",
+                ubicacion: "Ubicacion 2",
+                administrador: "Administrador 2",
+                celular: "Celular 2",
+                observacion: "Observacion 2"
+            },
+            {
+                id: 3,
+                nombre: "San Agustin",
+                direccion: "Direccion 3",
+                ciudad: "Ciudad 3",
+                ubicacion: "Ubicacion 3",
+                administrador: "Administrador 3",
+                celular: "Celular 3",
+                observacion: "Observacion 3"
+            }
+        ]
+
+        dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
+        setLoading(false);
+    };
 
     const fetchData = () => {
         setLoading(true);
@@ -70,7 +111,7 @@ const UsuarioProvider = ({children}) => {
         api.post(endpoint, options).then((res) => {
             if(!res.err){
                 dispatch({ type: TYPES.CREATE_DATA, payload: res.data });
-                navigate('/admin/usuario/');
+                navigate('/admin/espacios/');
                 setType("success");
                 setMessage("The registry was updated correctly");
                 setStatus(1);
@@ -94,7 +135,7 @@ const UsuarioProvider = ({children}) => {
             if(!res.err){
                 setDetail(res.data);
                 dispatch({ type: TYPES.UPDATE_DATA, payload: res.data });
-                navigate('/admin/usuario');
+                navigate('/admin/espacios');
                 setType("success");
                 setMessage("The registry was updated correctly");
                 setStatus(1);
@@ -132,8 +173,8 @@ const UsuarioProvider = ({children}) => {
         setModule, setDetail 
     };
 
-    return <UsuarioContext.Provider value={data}>{children}</UsuarioContext.Provider>;
+    return <EspaciosContext.Provider value={data}>{children}</EspaciosContext.Provider>;
 }
 
-export { UsuarioProvider };
-export default UsuarioContext;
+export { EspaciosProvider };
+export default EspaciosContext;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import UsuarioContext from "../../../context/UsuarioContext";
+import ClientesContext from "../../../context/ClientesContext";
 import Header from "components/Headers/Header.js";
 import ListGeneric from "../../../components/List/Index.js"
 import { Card, CardHeader, CardBody, Container, Row } from "reactstrap";
@@ -12,7 +12,7 @@ function List({ tab }) {
 
   const { 
     db:data, setDetail,  setToDetail, setToUpdate, setViewModal, setModule, deleteData
-  } = useContext(UsuarioContext);
+  } = useContext(ClientesContext);
 
   const [filter, setFilter] = useState("");
 
@@ -30,13 +30,14 @@ function List({ tab }) {
     { name: "ID", selector: row => row.id, sortable: true, width: "100px" },
     { name: "Nombre", selector: row => row.nombre, sortable: true },
     { name: "Direccion", selector: row => row.direccion, sortable: true },
-    { name: "Telefono", selector: row => row.telefono, sortable: true },
-    { name: "Correo", selector: row => row.correo, sortable: true },
+    { name: "Ciudad", selector: row => row.ciudad, sortable: true },
+    { name: "Administrador", selector: row => row.administrador, sortable: true },
+    { name: "Celular", selector: row => row.celular, sortable: true },
     { name: "Acciones", width: "200px", cell: row => (
       <> 
       <Link className='btn btn-primary btn-sm'
             color="primary"
-            to={"/admin/usuario/detail/"+row.id}
+            to={"/admin/clientes/detail/"+row.id}
         >
         Detallar
         </Link>
@@ -97,7 +98,7 @@ function List({ tab }) {
   return (
     <>
     {state.alert}
-    <Header brandText="Usuarios" /> /* Categorias */
+    <Header brandText="Edificios" />
     <Container className="mt--7" fluid>
       <Row>
         <div className="col">
@@ -105,9 +106,9 @@ function List({ tab }) {
             <CardHeader className="">
               <div className="align-items-center row">
                 <div className="col-11">
-                  <h3 className="mb-0">Usuarios</h3>
+                  <h3 className="mb-0">Clientes</h3>
                   <p className="text-sm mb-0">
-                    Listado de usuarios registrados en el sistema
+                    Listado de clientes registrados en el sistema
                   </p>
                 </div>
               </div>
@@ -135,7 +136,7 @@ function List({ tab }) {
                         color="primary"
                         to={"add"}
                       >
-                        Agregar Usuario
+                        Agregar Cliente
                       </Link>
                     </div>
             </CardBody>

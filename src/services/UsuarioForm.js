@@ -4,28 +4,20 @@ export const validationsForm = (form) => {
     let regexComments = /^.{1,255}$/;
     let regexText40 = /^.{1,40}$/;
 
+    if (!form.descripcion) {
+        errores.descripcion = "Please the field is required.";
+    } else if (!regexText40.test(form.descripcion.trim())) {
+        errores.descripcion = "The field accepts up to 40 characters.";
+    } else{
+        errores.descripcion = "";
+    }
+
     if (!form.nombre) {
         errores.nombre = "Please the field is required.";
     } else if (!regexText40.test(form.nombre.trim())) {
         errores.nombre = "The field accepts up to 40 characters.";
     } else{
         errores.nombre = "";
-    }
-
-    if (!form.direccion) {
-        errores.direccion = "Please the field is required.";
-    } else if (!regexText40.test(form.direccion.trim())) {
-        errores.direccion = "The field accepts up to 40 characters.";
-    } else{
-        errores.direccion = "";
-    }
-
-    if (!form.telefono) {
-        errores.telefono = "Please the field is required.";
-    } else if (!regexText40.test(form.telefono.trim())) {
-        errores.telefono = "The field accepts up to 40 characters.";
-    } else{
-        errores.telefono = "";
     }
 
     if (!form.correo) {
@@ -35,7 +27,22 @@ export const validationsForm = (form) => {
     } else{
         errores.correo = "";
     }
-        
+    
+    if (!form.telefono) {
+        errores.telefono = "Please the field is required.";
+    } else if (!regexText40.test(form.telefono.trim())) {
+        errores.telefono = "The field accepts up to 40 characters.";
+    } else{
+        errores.telefono = "";
+    }
+
+    if (!form.direccion) {
+        errores.direccion = "Please the field is required.";
+    } else if (!regexText40.test(form.direccion.trim())) {
+        errores.direccion = "The field accepts up to 40 characters.";
+    } else{
+        errores.direccion = "";
+    }
 
     return errores;
 };

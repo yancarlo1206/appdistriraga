@@ -2,17 +2,19 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, Container, Row, Col } from "reactstrap";
   
 import { Link, useParams } from "react-router-dom";
-import UsuarioContext from "context/UsuarioContext";
-import UsuarioFormValidate from "../../../services/UsuarioForm";
+import ApartamentosContext from "context/ApartamentosContext";
+import ApartamentosFormValidate from "../../../services/ApartamentosForm";
 import { useForm } from "hooks/useForm";
 import Header from "components/Headers/Header";
 
 const initialForm = {
-    descripcion: "",
     nombre: "",
     direccion: "",
-    telefono: "",
-    correo: "",
+    ciudad: "",
+    ubicacion: "",
+    administrador: "",
+    celular: "",
+    observacion: "",
 };
 
 const Formulario = ( ) => {
@@ -20,7 +22,7 @@ const Formulario = ( ) => {
     const { 
         detail:data, updateData, saveData, setModule, module, setToDetail,setDetail, 
         setToUpdate
-    } = useContext(UsuarioContext);
+    } = useContext(ApartamentosContext);
 
     const {
         validateInit,
@@ -34,7 +36,7 @@ const Formulario = ( ) => {
         handleChange,
         handleBlur,
         handleSubmit,
-    } = useForm(initialForm, UsuarioFormValidate.validationsForm);
+    } = useForm(initialForm, ApartamentosFormValidate.validationsForm);
 
     const { id } = useParams();
 
@@ -79,9 +81,9 @@ const Formulario = ( ) => {
                     <CardHeader className="">
                       <div className="align-items-center row">
                         <div className="col-11">
-                          <h3 className="mb-0">{module?.toUpperCase()} USUARIO</h3>
+                          <h3 className="mb-0">{module?.toUpperCase()} APARTAMENTO</h3>
                           <p className="text-sm mb-0">
-                            Formulario de gestion de usuarios
+                            Formulario de gestion de apartamentos
                           </p>
                         </div>
                       </div>
@@ -90,31 +92,6 @@ const Formulario = ( ) => {
                         <Form>
                             <div className="pl-lg-4">
                             <Row>
-                                <Col lg="12">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-descripcion"
-                                        >
-                                        Descripcion <span className="text-danger">*</span>
-                                        </label>
-                                        <Input
-                                        className="form-control"
-                                        id="input-descripcion"
-                                        placeholder=""
-                                        type="text"
-                                        name="descripcion"
-                                        required="required"
-                                        invalid={errors.descripcion !== ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        defaultValue={data.descripcion}
-                                        />
-                                        <div className="invalid-feedback">
-                                            {errors.descripcion}
-                                        </div>
-                                    </FormGroup>
-                                </Col>
                                 <Col lg="12">
                                     <FormGroup>
                                         <label
@@ -169,24 +146,24 @@ const Formulario = ( ) => {
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
-                                        htmlFor="input-telefono"
+                                        htmlFor="input-ciudad"
                                         >
-                                        Telefono <span className="text-danger">*</span>
+                                        Ciudad <span className="text-danger">*</span>
                                         </label>
                                         <Input
                                         className="form-control"
-                                        id="input-telefono"
+                                        id="input-ciudad"
                                         placeholder=""
                                         type="text"
-                                        name="telefono"
+                                        name="ciudad"
                                         required="required"
-                                        invalid={errors.telefono !== ""}
+                                        invalid={errors.ciudad !== ""}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        defaultValue={data.telefono}
+                                        defaultValue={data.ciudad}
                                         />
                                         <div className="invalid-feedback">
-                                            {errors.telefono}
+                                            {errors.ciudad}
                                         </div>
                                     </FormGroup>
                                 </Col>
@@ -194,24 +171,99 @@ const Formulario = ( ) => {
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
-                                        htmlFor="input-correo"
+                                        htmlFor="input-ubicacion"
                                         >
-                                        Correo <span className="text-danger">*</span>
+                                        Ubicacion <span className="text-danger">*</span>
                                         </label>
                                         <Input
                                         className="form-control"
-                                        id="input-correo"
+                                        id="input-ubicacion"
                                         placeholder=""
                                         type="text"
-                                        name="correo"
+                                        name="ubicacion"
                                         required="required"
-                                        invalid={errors.correo !== ""}
+                                        invalid={errors.ubicacion !== ""}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        defaultValue={data.correo}
+                                        defaultValue={data.ubicacion}
                                         />
                                         <div className="invalid-feedback">
-                                            {errors.correo}
+                                            {errors.ubicacion}
+                                        </div>
+                                    </FormGroup>
+                                </Col>
+                                <Col lg="12">
+                                    <FormGroup>
+                                        <label
+                                        className="form-control-label"
+                                        htmlFor="input-administrador"
+                                        >
+                                        Administrador <span className="text-danger">*</span>
+                                        </label>
+                                        <Input
+                                        className="form-control"
+                                        id="input-administrador"
+                                        placeholder=""
+                                        type="text"
+                                        name="administrador"
+                                        required="required"
+                                        invalid={errors.administrador !== ""}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        defaultValue={data.administrador}
+                                        />
+                                        <div className="invalid-feedback">
+                                            {errors.administrador}
+                                        </div>
+                                    </FormGroup>
+                                </Col>
+                                <Col lg="12">
+                                    <FormGroup>
+                                        <label
+                                        className="form-control-label"
+                                        htmlFor="input-celular"
+                                        >
+                                        Celular <span className="text-danger">*</span>
+                                        </label>
+                                        <Input
+                                        className="form-control"
+                                        id="input-celular"
+                                        placeholder=""
+                                        type="text"
+                                        name="celular"
+                                        required="required"
+                                        invalid={errors.celular !== ""}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        defaultValue={data.celular}
+                                        />
+                                        <div className="invalid-feedback">
+                                            {errors.celular}
+                                        </div>
+                                    </FormGroup>
+                                </Col>
+                                <Col lg="12">
+                                    <FormGroup>
+                                        <label
+                                        className="form-control-label"
+                                        htmlFor="input-observacion"
+                                        >
+                                        Observacion <span className="text-danger">*</span>
+                                        </label>
+                                        <Input
+                                        className="form-control"
+                                        id="input-observacion"
+                                        placeholder=""
+                                        type="text"
+                                        name="observacion"
+                                        required="required"
+                                        invalid={errors.observacion !== ""}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        defaultValue={data.observacion}
+                                        />
+                                        <div className="invalid-feedback">
+                                            {errors.observacion}
                                         </div>
                                     </FormGroup>
                                 </Col>
@@ -237,7 +289,7 @@ const Formulario = ( ) => {
                                 <Link
                                     className="btn btn-danger"
                                     color="default"
-                                    to={"/admin/usuario"}
+                                    to={"/admin/apartamentos"}
                                     >
                                     Cancelar
                                 </Link>
