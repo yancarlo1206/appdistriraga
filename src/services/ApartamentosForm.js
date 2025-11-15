@@ -34,6 +34,14 @@ export const validationsForm = (form) => {
         errores.observacion = "";
     }
 
+    if (!form.estado) {
+        errores.estado = "Please the field is required.";
+    } else if (!regexText40.test(form.estado)) {
+        errores.estado = "The field accepts up to 40 characters.";
+    } else{
+        errores.estado = "";
+    }
+
     return errores;
 };
 

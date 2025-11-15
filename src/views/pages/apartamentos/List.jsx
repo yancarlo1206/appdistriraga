@@ -31,6 +31,8 @@ function List({ tab }) {
     { name: "Nombre", selector: row => row.nombre, sortable: true },
     { name: "Edificio", selector: row => row.edificio.nombre, sortable: true },
     { name: "Precio", selector: row => row.precio, sortable: true },
+    { name: "Estado", selector: row => row.estado, sortable: true },
+    { name: "Observacion", selector: row => row.observacion, sortable: true },
     { name: "Acciones", width: "200px", cell: row => (
       <> 
       <Link className='btn btn-primary btn-sm'

@@ -28,8 +28,7 @@ const CotizacionProvider = ({children}) => {
     let url = REACT_APP_API_URL+"cotizacion";
 
     useEffect(() => {
-        //fetchData();
-        fetchDataCotizacion();
+        fetchData();
     },[]);
 
     useEffect(() => {
@@ -37,47 +36,6 @@ const CotizacionProvider = ({children}) => {
             fetchDataDetail();
         }
     },[toUpdate]);
-
-    const fetchDataCotizacion = () => {
-        setLoading(true);
-
-       let data = [
-  {
-    id: 1,
-    fecha: "2025-11-03",
-    usuario: "Juan Pérez",
-    apartamento: "Torre A - 302",
-    precio: "$2.500.000",
-    tipo: "Reparación eléctrica",
-    observacion: "Incluye cambio de cableado y revisión de tomas.",
-    estado: "Pendiente"
-  },
-  {
-    id: 2,
-    fecha: "2025-11-02",
-    usuario: "María Gómez",
-    apartamento: "Edificio Sol - 204",
-    precio: "$3.200.000",
-    tipo: "Pintura interior",
-    observacion: "Pintura lavable color blanco marfil en sala y comedor.",
-    estado: "Aprobada"
-  },
-  {
-    id: 3,
-    fecha: "2025-10-30",
-    usuario: "Carlos López",
-    apartamento: "Conjunto Oasis - 101",
-    precio: "$1.850.000",
-    tipo: "Mantenimiento de plomería",
-    observacion: "Cambio de grifos y revisión de fugas en baño.",
-    estado: "Rechazada"
-  }
-];
-
-
-        dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
-        setLoading(false);
-    };
 
     const fetchData = () => {
         setLoading(true);
