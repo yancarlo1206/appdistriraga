@@ -15,6 +15,12 @@ const CotizacionProvider = ({children}) => {
     const [detail, setDetail] = useState({});
     const [module, setModule] = useState();
 
+    const [cliente, setCliente] = useState([]);
+    const [edificio, setEdificio] = useState([]);
+    const [apartamento, setApartamento] = useState([{"id":"0","text":"Primero se debe seleccionar un edificio..."}]);
+    const [tipoCotizacion, setTipoCotizacion] = useState([]);
+    const [estadoCotizacion, setEstadoCotizacion] = useState([]);
+
     const navigate = useNavigate();
     const { REACT_APP_API_URL } = process.env;
 
@@ -37,6 +43,15 @@ const CotizacionProvider = ({children}) => {
         }
     },[toUpdate]);
 
+    useEffect(() => {
+        if(module){
+            fetchDataCliente();
+            fetchDataEdificio();
+            fetchDataTipoCotizacion();
+            fetchDataEstadoCotizacion();
+        }
+    },[module]);
+
     const fetchData = () => {
         setLoading(true);
          api.get(url).then((res) => {
@@ -53,8 +68,55 @@ const CotizacionProvider = ({children}) => {
         setLoading(true);
         url = url+"/"+toUpdate;
         api.get(url).then((res) => {
+            res.data['cliente'] = res.data.cliente?.id;
+            res.data['edificio'] = res.data.apartamento?.edificio?.id;
+            
             setDetail(res.data);
             setLoading(false);
+        });
+    };
+
+    const fetchDataCliente = () => {
+        let urlFetch = REACT_APP_API_URL+"cliente";
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setCliente(data);
+        });
+    };
+
+    const fetchDataEdificio = () => {
+        let urlFetch = REACT_APP_API_URL+"edificio";
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setEdificio(data);
+        });
+    };
+
+    const fetchDataTipoCotizacion = () => {
+        let urlFetch = REACT_APP_API_URL+"cotizacionTipo";
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setTipoCotizacion(data);
+        });
+    };
+
+    const fetchDataEstadoCotizacion = () => {
+        let urlFetch = REACT_APP_API_URL+"cotizacionEstado";
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setEstadoCotizacion(data);
         });
     };
 
@@ -129,7 +191,7 @@ const CotizacionProvider = ({children}) => {
 
     const data = { 
         db, detail, setToDetail, setToUpdate, updateData, saveData, deleteData, module, 
-        setModule, setDetail 
+        setModule, setDetail, cliente, edificio, apartamento, tipoCotizacion, estadoCotizacion
     };
 
     return <CotizacionContext.Provider value={data}>{children}</CotizacionContext.Provider>;

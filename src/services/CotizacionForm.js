@@ -10,18 +10,20 @@ export const validationsForm = (form) => {
         errores.fecha = "";
     }
 
-    if (!form.usuario) {
-        errores.usuario = "Please the field is required.";
-    } else if (!regexText40.test(form.usuario.trim())) {
-        errores.usuario = "The field accepts up to 40 characters.";
+    if (!form.cliente) {
+        errores.cliente = "Please the field is required.";
     } else{
-        errores.usuario = "";
+        errores.cliente = "";
+    }
+
+    if (!form.edificio) {
+        errores.edificio = "Please the field is required.";
+    } else{
+        errores.edificio = "";
     }
 
     if (!form.apartamento) {
         errores.apartamento = "Please the field is required.";
-    } else if (!regexText40.test(form.apartamento.trim())) {
-        errores.apartamento = "The field accepts up to 40 characters.";
     } else{
         errores.apartamento = "";
     }
@@ -36,26 +38,14 @@ export const validationsForm = (form) => {
 
     if (!form.tipo) {
         errores.tipo = "Please the field is required.";
-    } else if (!regexText40.test(form.tipo.trim())) {
-        errores.tipo = "The field accepts up to 40 characters.";
     } else{
         errores.tipo = "";
     }
 
     if (!form.estado) {
         errores.estado = "Please the field is required.";
-    } else if (!regexText40.test(form.estado.trim())) {
-        errores.estado = "The field accepts up to 40 characters.";
     } else{
         errores.estado = "";
-    }
-
-    if (!form.observacion) {
-        errores.observacion = "Please the field is required.";
-    } else if (!regexText40.test(form.observacion.trim())) {
-        errores.observacion = "The field accepts up to 40 characters.";
-    } else{
-        errores.observacion = "";
     }
 
     return errores;

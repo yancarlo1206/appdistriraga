@@ -9,7 +9,8 @@ import Header from "components/Headers/Header";
 
 const initialForm = {
     fecha: "",
-    usuario: "",
+    cliente: "",
+    edificio: "",
     apartamento: "",
     precio: "",
     tipo: "",
@@ -21,7 +22,7 @@ const Formulario = ( ) => {
 
     const { 
         detail:data, updateData, saveData, setModule, module, setToDetail,setDetail, 
-        setToUpdate
+        setToUpdate, cliente, edificio, apartamento, tipoCotizacion, estadoCotizacion
     } = useContext(CotizacionContext);
 
     const {
@@ -92,7 +93,7 @@ const Formulario = ( ) => {
                         <Form>
                             <div className="pl-lg-4">
                             <Row>
-                                <Col lg="12">
+                                <Col lg="6">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
@@ -104,7 +105,7 @@ const Formulario = ( ) => {
                                         className="form-control"
                                         id="input-fecha"
                                         placeholder=""
-                                        type="text"
+                                        type="date"
                                         name="fecha"
                                         required="required"
                                         invalid={errors.fecha !== ""}
@@ -117,63 +118,103 @@ const Formulario = ( ) => {
                                         </div>
                                     </FormGroup>
                                 </Col>
-                                <Col lg="12">
+                                <Col lg="6">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
-                                        htmlFor="input-usuario"
+                                        htmlFor="input-cliente"
                                         >
-                                        Usuario <span className="text-danger">*</span>
+                                        Cliente <span className="text-danger">*</span>
                                         </label>
-                                        <Input
-                                        className="form-control"
-                                        id="input-usuario"
-                                        placeholder=""
-                                        type="text"
-                                        name="usuario"
-                                        required="required"
-                                        invalid={errors.usuario !== ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        defaultValue={data.usuario}
-                                        />
+                                        <Input 
+                                            className="form-control"
+                                            id="input-cliente"
+                                            type="select"
+                                            name="cliente"
+                                            value={form.cliente}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={errors.cliente !== ""}
+                                            >
+                                            <option value="" hidden></option>
+                                            {cliente.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.text}
+                                                </option>
+                                            ))};
+                                        </Input>
                                         <div className="invalid-feedback">
-                                            {errors.usuario}
+                                            {errors.cliente}
                                         </div>
                                     </FormGroup>
                                 </Col>
-                                <Col lg="12">
+                                <Col lg="6">
+                                    <FormGroup>
+                                        <label
+                                        className="form-control-label"
+                                        htmlFor="input-edificio"
+                                        >
+                                        Edificio <span className="text-danger">*</span>
+                                        </label>
+                                        <Input 
+                                            className="form-control"
+                                            id="input-edificio"
+                                            type="select"
+                                            name="edificio"
+                                            value={form.edificio}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={errors.edificio !== ""}
+                                            >
+                                            <option value="" hidden></option>
+                                            {edificio.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.text}
+                                                </option>
+                                            ))};
+                                        </Input>
+                                        <div className="invalid-feedback">
+                                            {errors.edificio}
+                                        </div>
+                                    </FormGroup>
+                                </Col>
+                                <Col lg="6">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
                                         htmlFor="input-apartamento"
                                         >
-                                        apartamento <span className="text-danger">*</span>
+                                        Apartamento <span className="text-danger">*</span>
                                         </label>
-                                        <Input
-                                        className="form-control"
-                                        id="input-apartamento"
-                                        placeholder=""
-                                        type="text"
-                                        name="apartamento"
-                                        required="required"
-                                        invalid={errors.apartamento !== ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        defaultValue={data.apartamento}
-                                        />
+                                        <Input 
+                                            className="form-control"
+                                            id="input-apartamento"
+                                            type="select"
+                                            name="apartamento"
+                                            value={form.apartamento}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={errors.apartamento !== ""}
+                                            >
+                                            <option value="" hidden></option>
+                                            {apartamento.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.text}
+                                                </option>
+                                            ))};
+                                        </Input>
                                         <div className="invalid-feedback">
                                             {errors.apartamento}
                                         </div>
                                     </FormGroup>
                                 </Col>
-                                <Col lg="12">
+                                <Col lg="4">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
                                         htmlFor="input-precio"
                                         >
-                                        precio <span className="text-danger">*</span>
+                                        Precio <span className="text-danger">*</span>
                                         </label>
                                         <Input
                                         className="form-control"
@@ -192,7 +233,7 @@ const Formulario = ( ) => {
                                         </div>
                                     </FormGroup>
                                 </Col>
-                                <Col lg="12">
+                                <Col lg="4">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
@@ -200,20 +241,55 @@ const Formulario = ( ) => {
                                         >
                                         Tipo <span className="text-danger">*</span>
                                         </label>
-                                        <Input
-                                        className="form-control"
-                                        id="input-tipo"
-                                        placeholder=""
-                                        type="text"
-                                        name="tipo"
-                                        required="required"
-                                        invalid={errors.tipo !== ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        defaultValue={data.tipo}
-                                        />
+                                        <Input 
+                                            className="form-control"
+                                            id="input-tipo"
+                                            type="select"
+                                            name="tipo"
+                                            value={form.tipo}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={errors.tipo !== ""}
+                                            >
+                                            <option value="" hidden></option>
+                                            {tipoCotizacion.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.text}
+                                                </option>
+                                            ))};
+                                        </Input>
                                         <div className="invalid-feedback">
                                             {errors.tipo}
+                                        </div>
+                                    </FormGroup>
+                                </Col>
+                                <Col lg="4">
+                                    <FormGroup>
+                                        <label
+                                        className="form-control-label"
+                                        htmlFor="input-estado"
+                                        >
+                                        Estado <span className="text-danger">*</span>
+                                        </label>
+                                        <Input 
+                                            className="form-control"
+                                            id="input-estado"
+                                            type="select"
+                                            name="estado"
+                                            value={form.estado}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={errors.estado !== ""}
+                                            >
+                                            <option value="" hidden></option>
+                                            {estadoCotizacion.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.text}
+                                                </option>
+                                            ))};
+                                        </Input>
+                                        <div className="invalid-feedback">
+                                            {errors.estado}
                                         </div>
                                     </FormGroup>
                                 </Col>
@@ -223,48 +299,19 @@ const Formulario = ( ) => {
                                         className="form-control-label"
                                         htmlFor="input-observacion"
                                         >
-                                        Observacion <span className="text-danger">*</span>
+                                        Observacion
                                         </label>
                                         <Input
                                         className="form-control"
                                         id="input-observacion"
                                         placeholder=""
-                                        type="text"
+                                        type="textarea"
+                                        rows="3"
                                         name="observacion"
-                                        required="required"
-                                        invalid={errors.observacion !== ""}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         defaultValue={data.observacion}
                                         />
-                                        <div className="invalid-feedback">
-                                            {errors.observacion}
-                                        </div>
-                                    </FormGroup>
-                                </Col>
-                                <Col lg="12">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-estado"
-                                        >
-                                        Estado <span className="text-danger">*</span>
-                                        </label>
-                                        <Input
-                                        className="form-control"
-                                        id="input-estado"
-                                        placeholder=""
-                                        type="text"
-                                        name="estado"
-                                        required="required"
-                                        invalid={errors.estado !== ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        defaultValue={data.estado}
-                                        />
-                                        <div className="invalid-feedback">
-                                            {errors.estado}
-                                        </div>
                                     </FormGroup>
                                 </Col>
                             </Row>
