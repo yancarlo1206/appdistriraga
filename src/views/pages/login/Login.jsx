@@ -20,7 +20,7 @@ import { useForm } from "hooks/useForm";
 import { Link } from "react-router-dom";
 
 const initialForm = {
-    usuario: "",
+    username: "",
     password: "",
 };
   
@@ -77,15 +77,15 @@ const Login = () => {
                       id="input-usuario"
                       placeholder="Usuario"
                       type="text"
-                      name="usuario"
+                      name="username"
                       required="required"
-                      invalid={errors.usuario !== ""}
+                      invalid={errors.username !== ""}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      defaultValue={form.usuario}
+                      defaultValue={form.username}
                       />
                       <div className="invalid-feedback">
-                          {errors.usuario}
+                          {errors.username}
                       </div>
                   </InputGroup>
                 </FormGroup>
