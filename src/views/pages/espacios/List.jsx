@@ -28,11 +28,14 @@ function List({ tab }) {
 
   const columns = [
     { name: "ID", selector: row => row.id, sortable: true, width: "100px" },
+
+    { name: "Edificio", selector: row => row.apartamento?.edificio?.nombre, sortable: true },
+    { name: "Apartamento", selector: row => row.apartamento?.nombre, sortable: true },
     { name: "Nombre", selector: row => row.nombre, sortable: true },
-    { name: "Alto", selector: row => row.alto, sortable: true },
-    { name: "Ancho", selector: row => row.ancho, sortable: true },
-    { name: "Factor", selector: row => row.factor, sortable: true },
-    { name: "Precio", selector: row => row.precio, sortable: true },
+    { name: "Precio", selector: row => `$${row.precio?.toFixed(2)}`, sortable: true },
+    { name: "Estado", width: "200px", cell: row => (
+      row.estado ? "Activo" : "Inactivo"
+    )},
     { name: "Acciones", width: "200px", cell: row => (
       <> 
       <Link className='btn btn-primary btn-sm'

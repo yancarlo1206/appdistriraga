@@ -15,6 +15,12 @@ const EspaciosProvider = ({children}) => {
     const [detail, setDetail] = useState({});
     const [module, setModule] = useState();
 
+    const [edificio, setEdificio] = useState([]);
+    const [apartamento, setApartamento] = useState([{"id":"0","text":"Primero se debe seleccionar un edificio..."}]);
+    const [estadoEspacio, setEstadoEspacio] = useState([{"id":"1","text":"ACTIVO"},{"id":"0","text":"INACTIVO"}]);
+
+    const [toEdificio, setToEdificio] = useState();
+
     const navigate = useNavigate();
     const { REACT_APP_API_URL } = process.env;
 
@@ -25,11 +31,10 @@ const EspaciosProvider = ({children}) => {
     const { db } = state;
 
     let api = helpHttp();
-    let url = REACT_APP_API_URL+"espacios";
+    let url = REACT_APP_API_URL+"espacio";
 
     useEffect(() => {
-        //fetchData();
-        fetchDataEspacios();
+        fetchData();
     },[]);
 
     useEffect(() => {
@@ -38,45 +43,17 @@ const EspaciosProvider = ({children}) => {
         }
     },[toUpdate]);
 
-    const fetchDataEspacios = () => {
-        setLoading(true);
+    useEffect(() => {
+        if(module){
+            fetchDataEdificio();
+        }
+    },[module]);
 
-        let data = [
-  {
-    id: 1,
-    nombre: "Sala Principal",
-    alto: "2.8 m",
-    ancho: "4.5 m",
-    factor: "1.2",
-    precio: "$1.200.000",
-    celular: "3001234567",
-    observacion: "Espacio amplio con buena iluminación natural."
-  },
-  {
-    id: 2,
-    nombre: "Cocina Integral",
-    alto: "2.5 m",
-    ancho: "3.2 m",
-    factor: "1.0",
-    precio: "$950.000",
-    celular: "3109876543",
-    observacion: "Incluye gabinetes superiores y zona de lavado."
-  },
-  {
-    id: 3,
-    nombre: "Balcón",
-    alto: "2.6 m",
-    ancho: "2.8 m",
-    factor: "0.8",
-    precio: "$600.000",
-    celular: "3014567890",
-    observacion: "Vista panorámica hacia el conjunto residencial."
-  }
-];
-
-        dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
-        setLoading(false);
-    };
+    useEffect(() => {
+        if(toEdificio){
+            fetchDataApartamentoEdificio(toEdificio);
+        }
+    },[toEdificio]);
 
     const fetchData = () => {
         setLoading(true);
@@ -94,8 +71,32 @@ const EspaciosProvider = ({children}) => {
         setLoading(true);
         url = url+"/"+toUpdate;
         api.get(url).then((res) => {
+            res.data['edificio'] = res.data.apartamento?.edificio?.id;
+            res.data['apartamento'] = res.data.apartamento?.id;
             setDetail(res.data);
             setLoading(false);
+        });
+    };
+
+    const fetchDataEdificio = () => {
+        let urlFetch = REACT_APP_API_URL+"edificio";
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setEdificio(data);
+        });
+    };
+
+    const fetchDataApartamentoEdificio = (edificioId) => {
+        let urlFetch = REACT_APP_API_URL+"apartamento?edificio="+edificioId;
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setApartamento(data);
         });
     };
 
@@ -170,7 +171,7 @@ const EspaciosProvider = ({children}) => {
 
     const data = { 
         db, detail, setToDetail, setToUpdate, updateData, saveData, deleteData, module, 
-        setModule, setDetail 
+        setModule, setDetail, edificio, setEdificio, apartamento, setApartamento, estadoEspacio
     };
 
     return <EspaciosContext.Provider value={data}>{children}</EspaciosContext.Provider>;

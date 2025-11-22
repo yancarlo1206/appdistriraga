@@ -117,7 +117,7 @@ const Formulario = ( ) => {
                                             ))};
                                         </Input>
                                         <div className="invalid-feedback">
-                                            {errors.estado}
+                                            {errors.edificio}
                                         </div>
                                     </FormGroup>
                                 </Col>
