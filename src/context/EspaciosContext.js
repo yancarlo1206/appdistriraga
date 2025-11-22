@@ -90,7 +90,7 @@ const EspaciosProvider = ({children}) => {
     };
 
     const fetchDataApartamentoEdificio = (edificioId) => {
-        let urlFetch = REACT_APP_API_URL+"apartamento?edificio="+edificioId;
+        let urlFetch = REACT_APP_API_URL+"apartamento/listPorEdificio/"+edificioId;
         api.get(urlFetch).then((res) => {
             var data = res.data.map(function (obj) {
                 obj.text = obj.text || obj.nombre;
@@ -103,8 +103,14 @@ const EspaciosProvider = ({children}) => {
     const saveData = (data) => {
         setLoading(true);
         let endpoint = url;
-        let newData = data;
+        
+        const newData = {
+            ...data,
+            apartamento: { id: data.apartamento }
+        };
+
         delete newData.id;
+        
         let options = {
             body: newData,
             headers: {"content-type":"application/json"}
@@ -126,8 +132,14 @@ const EspaciosProvider = ({children}) => {
     const updateData = (data) => {
         setLoading(true);
         let endpoint = url+"/"+data.id;
-        let newData = data;
+        
+        const newData = {
+            ...data,
+            apartamento: { id: data.apartamento }
+        };
+
         delete newData.id;
+
         let options = {
             body: newData,
             headers: {"content-type":"application/json"}
@@ -171,7 +183,8 @@ const EspaciosProvider = ({children}) => {
 
     const data = { 
         db, detail, setToDetail, setToUpdate, updateData, saveData, deleteData, module, 
-        setModule, setDetail, edificio, setEdificio, apartamento, setApartamento, estadoEspacio
+        setModule, setDetail, edificio, setEdificio, apartamento, setApartamento, estadoEspacio,
+        setToEdificio
     };
 
     return <EspaciosContext.Provider value={data}>{children}</EspaciosContext.Provider>;

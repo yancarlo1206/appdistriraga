@@ -21,6 +21,8 @@ const CotizacionProvider = ({children}) => {
     const [tipoCotizacion, setTipoCotizacion] = useState([]);
     const [estadoCotizacion, setEstadoCotizacion] = useState([]);
 
+    const [toEdificio, setToEdificio] = useState();
+
     const navigate = useNavigate();
     const { REACT_APP_API_URL } = process.env;
 
@@ -52,6 +54,12 @@ const CotizacionProvider = ({children}) => {
         }
     },[module]);
 
+    useEffect(() => {
+        if(toEdificio){
+            fetchDataApartamentoEdificio(toEdificio);
+        }
+    },[toEdificio]);
+
     const fetchData = () => {
         setLoading(true);
          api.get(url).then((res) => {
@@ -68,10 +76,15 @@ const CotizacionProvider = ({children}) => {
         setLoading(true);
         url = url+"/"+toUpdate;
         api.get(url).then((res) => {
-            res.data['cliente'] = res.data.cliente?.id;
-            res.data['edificio'] = res.data.apartamento?.edificio?.id;
-            
-            setDetail(res.data);
+            const detail = {
+                ...res.data,
+                cliente: res.data?.cliente?.id ?? null,
+                edificio: res.data?.apartamento?.edificio?.id ?? null,
+                apartamento: res.data?.apartamento?.id ?? null,
+                tipo: res.data?.tipo?.id ?? null,
+                estado: res.data?.estado?.id ?? null,
+                };
+            setDetail(detail);
             setLoading(false);
         });
     };
@@ -120,11 +133,31 @@ const CotizacionProvider = ({children}) => {
         });
     };
 
+    const fetchDataApartamentoEdificio = (edificioId) => {
+        let urlFetch = REACT_APP_API_URL+"apartamento/listPorEdificio/"+edificioId;
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setApartamento(data);
+        });
+    };
+
     const saveData = (data) => {
         setLoading(true);
         let endpoint = url;
-        let newData = data;
+
+        const newData = {
+            ...data,
+            apartamento: { id: data.apartamento },
+            cliente: { id: data.cliente },
+            tipo: { id: data.tipo },
+            estado: { id: data.estado }
+        };
+
         delete newData.id;
+
         let options = {
             body: newData,
             headers: {"content-type":"application/json"}
@@ -146,8 +179,17 @@ const CotizacionProvider = ({children}) => {
     const updateData = (data) => {
         setLoading(true);
         let endpoint = url+"/"+data.id;
-        let newData = data;
+        
+        const newData = {
+            ...data,
+            apartamento: { id: data.apartamento },
+            cliente: { id: data.cliente },
+            tipo: { id: data.tipo },
+            estado: { id: data.estado }
+        };
+
         delete newData.id;
+
         let options = {
             body: newData,
             headers: {"content-type":"application/json"}
@@ -191,7 +233,8 @@ const CotizacionProvider = ({children}) => {
 
     const data = { 
         db, detail, setToDetail, setToUpdate, updateData, saveData, deleteData, module, 
-        setModule, setDetail, cliente, edificio, apartamento, tipoCotizacion, estadoCotizacion
+        setModule, setDetail, cliente, edificio, apartamento, tipoCotizacion, 
+        estadoCotizacion, toEdificio, setToEdificio
     };
 
     return <CotizacionContext.Provider value={data}>{children}</CotizacionContext.Provider>;

@@ -23,7 +23,7 @@ const Formulario = ( ) => {
 
     const { 
         detail:data, updateData, saveData, setModule, module, setToDetail,setDetail, 
-        setToUpdate, edificio, apartamento, estadoEspacio
+        setToUpdate, edificio, apartamento, estadoEspacio, setToEdificio
     } = useContext(EspaciosContext);
 
     const {
@@ -56,6 +56,12 @@ const Formulario = ( ) => {
         setForm(data);
         setErrors(initialForm);
     },[data]);
+    
+    useEffect(() => {
+        if(form?.edificio) {
+            setToEdificio(form.edificio);
+        }
+    }, [form?.edificio]);
     
     const handleUpdate = (e) => {
         e.preventDefault();

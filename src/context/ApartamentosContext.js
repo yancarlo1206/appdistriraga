@@ -82,9 +82,14 @@ const ApartamentosProvider = ({children}) => {
     const saveData = (data) => {
         setLoading(true);
         let endpoint = url;
-        data.edificio = {"id": data.edificio};
-        let newData = data;
+
+        const newData = {
+            ...data,
+            edificio: { id: data.edificio }
+        };
+
         delete newData.id;
+        
         let options = {
             body: newData,
             headers: {"content-type":"application/json"}
@@ -106,9 +111,14 @@ const ApartamentosProvider = ({children}) => {
     const updateData = (data) => {
         setLoading(true);
         let endpoint = url+"/"+data.id;
-        data.edificio = {"id": data.edificio};
-        let newData = data;
+
+        const newData = {
+            ...data,
+            edificio: { id: data.edificio }
+        };
+
         delete newData.id;
+
         let options = {
             body: newData,
             headers: {"content-type":"application/json"}
