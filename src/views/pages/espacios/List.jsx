@@ -32,7 +32,14 @@ function List({ tab }) {
     { name: "Edificio", selector: row => row.apartamento?.edificio?.nombre, sortable: true },
     { name: "Apartamento", selector: row => row.apartamento?.nombre, sortable: true },
     { name: "Nombre", selector: row => row.nombre, sortable: true },
-    { name: "Precio", selector: row => `$${row.precio?.toFixed(2)}`, sortable: true },
+    { name: "Precio", width: "200px", cell: row => (
+        new Intl.NumberFormat('es-CO', { 
+          style: 'currency', 
+          currency: 'COP',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(row.precio || 0)
+      )},
     { name: "Estado", width: "200px", cell: row => (
       row.estado ? "Activo" : "Inactivo"
     )},

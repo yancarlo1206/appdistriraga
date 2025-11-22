@@ -33,7 +33,7 @@ var routes = [
   },*/
   {
     path: "/cotizacion",
-    name: "Cotizacion",
+    name: "Cotizaciones",
     icon: "ni ni-credit-card text-success",
     component: <Cotizacion />,
     layout: "/admin",

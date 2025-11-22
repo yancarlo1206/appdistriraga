@@ -27,31 +27,40 @@ function List({ tab }) {
   );
 
   const columns = [
-    { name: "ID", selector: row => row.id, sortable: true, width: "100px" },
-    { name: "Fecha", selector: row => row.fecha, sortable: true },
-    { name: "Usuario", selector: row => row.usuario, sortable: true },
-    { name: "Apartamento", selector: row => row.apartamento, sortable: true },
-    { name: "Precio", selector: row => row.precio, sortable: true },
-    { name: "Tipo", selector: row => row.tipo, sortable: true },
-    { name: "Observacion", selector: row => row.observacion, sortable: true },
-    { name: "Estado", selector: row => row.estado, sortable: true },
-    { name: "Acciones", width: "200px", cell: row => (
-      <> 
-      <Link className='btn btn-primary btn-sm'
-            color="primary"
-            to={"/admin/cotizacion/detail/"+row.id}
-        >
-        Detallar
-        </Link>
-      <Button
-            className='btn btn-danger btn-sm'
-            onClick={e => handleDelete(e, row.id)}
-        >
-            Eliminar
-      </Button>
-      </>
-    )}
-  ];
+      { name: "ID", selector: row => row.id, sortable: true, width: "100px" },
+      { name: "Fecha", width: "200px", cell: row => (
+        row.fecha ? new Date(row.fecha).toLocaleDateString() : ""
+      )},
+      { name: "Cliente", selector: row => row.cliente.nombre, sortable: true },
+      { name: "Edificio", selector: row => row.apartamento.edificio.nombre, sortable: true },
+      { name: "Precio", width: "200px", cell: row => (
+        new Intl.NumberFormat('es-CO', { 
+          style: 'currency', 
+          currency: 'COP',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(row.precio || 0)
+      )},
+      { name: "Estado", width: "200px", cell: row => (
+        row.estado ? "Activo" : "Inactivo"
+      )},
+      { name: "Acciones", width: "200px", cell: row => (
+        <> 
+        <Link className='btn btn-primary btn-sm'
+              color="primary"
+              to={"/admin/cotizacion/detail/"+row.id}
+          >
+          Detallar
+          </Link>
+        <Button
+              className='btn btn-danger btn-sm'
+              onClick={e => handleDelete(e, row.id)}
+          >
+              Eliminar
+        </Button>
+        </>
+      )}
+    ];
 
   const confirmAlert = (id) => {
     setState({
