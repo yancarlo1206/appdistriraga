@@ -62,8 +62,11 @@ const ApartamentosProvider = ({children}) => {
         setLoading(true);
         url = url+"/"+toUpdate;
         api.get(url).then((res) => {
-            res.data['edificio'] = res.data.edificio?.id;
-            setDetail(res.data);
+            const detail = {
+                ...res.data,
+                edificio: res.data?.edificio?.id ?? null,
+                };
+            setDetail(detail);
             setLoading(false);
         });
     };
@@ -99,7 +102,7 @@ const ApartamentosProvider = ({children}) => {
                 dispatch({ type: TYPES.CREATE_DATA, payload: res.data });
                 navigate('/admin/apartamentos/');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El apartamento fue registrado con éxito");
                 setStatus(1);
             }else{
 
@@ -129,7 +132,7 @@ const ApartamentosProvider = ({children}) => {
                 dispatch({ type: TYPES.UPDATE_DATA, payload: res.data });
                 navigate('/admin/apartamentos');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El apartamento fue actualizado con éxito");
                 setStatus(1);
             }else{
 
@@ -149,7 +152,7 @@ const ApartamentosProvider = ({children}) => {
             if(!res.err){
                 dispatch({ type: TYPES.DELETE_DATA, payload: id });
                 setType("success");
-                setMessage("The registry was deleted correctly");
+                setMessage("El apartamento fue eliminado con éxito");
                 setStatus(1);
             }else{
                 setType("danger");

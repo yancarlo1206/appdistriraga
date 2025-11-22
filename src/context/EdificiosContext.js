@@ -74,7 +74,7 @@ const EdificiosProvider = ({children}) => {
                 dispatch({ type: TYPES.CREATE_DATA, payload: res.data });
                 navigate('/admin/edificios/');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El edificio fue registrado con éxito");
                 setStatus(1);
             }else{
 
@@ -99,7 +99,7 @@ const EdificiosProvider = ({children}) => {
                 dispatch({ type: TYPES.UPDATE_DATA, payload: res.data });
                 navigate('/admin/edificios');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El edificio fue actualizado con éxito");
                 setStatus(1);
             }else{
 
@@ -119,7 +119,7 @@ const EdificiosProvider = ({children}) => {
             if(!res.err){
                 dispatch({ type: TYPES.DELETE_DATA, payload: id });
                 setType("success");
-                setMessage("The registry was deleted correctly");
+                setMessage("El edificio fue eliminado con éxito");
                 setStatus(1);
             }else{
                 setType("danger");

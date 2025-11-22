@@ -8,7 +8,6 @@ import { useForm } from "hooks/useForm";
 import Header from "components/Headers/Header";
 
 const initialForm = {
-    fecha: "",
     cliente: "",
     edificio: "",
     apartamento: "",
@@ -100,32 +99,7 @@ const Formulario = ( ) => {
                         <Form>
                             <div className="pl-lg-4">
                             <Row>
-                                <Col lg="6">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-fecha"
-                                        >
-                                        Fecha <span className="text-danger">*</span>
-                                        </label>
-                                        <Input
-                                        className="form-control"
-                                        id="input-fecha"
-                                        placeholder=""
-                                        type="date"
-                                        name="fecha"
-                                        required="required"
-                                        invalid={errors.fecha !== ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        defaultValue={data.fecha}
-                                        />
-                                        <div className="invalid-feedback">
-                                            {errors.fecha}
-                                        </div>
-                                    </FormGroup>
-                                </Col>
-                                <Col lg="6">
+                                <Col lg="12">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"

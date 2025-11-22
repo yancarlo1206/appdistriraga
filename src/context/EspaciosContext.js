@@ -71,9 +71,12 @@ const EspaciosProvider = ({children}) => {
         setLoading(true);
         url = url+"/"+toUpdate;
         api.get(url).then((res) => {
-            res.data['edificio'] = res.data.apartamento?.edificio?.id;
-            res.data['apartamento'] = res.data.apartamento?.id;
-            setDetail(res.data);
+            const detail = {
+                ...res.data,
+                edificio: res.data?.apartamento?.edificio?.id ?? null,
+                apartamento: res.data?.apartamento?.id ?? null,
+                };
+            setDetail(detail);
             setLoading(false);
         });
     };
@@ -120,7 +123,7 @@ const EspaciosProvider = ({children}) => {
                 dispatch({ type: TYPES.CREATE_DATA, payload: res.data });
                 navigate('/admin/espacios/');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El espacio fue registrado con éxito");
                 setStatus(1);
             }else{
 
@@ -150,7 +153,7 @@ const EspaciosProvider = ({children}) => {
                 dispatch({ type: TYPES.UPDATE_DATA, payload: res.data });
                 navigate('/admin/espacios');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El espacio fue actualizado con éxito");
                 setStatus(1);
             }else{
 
@@ -170,7 +173,7 @@ const EspaciosProvider = ({children}) => {
             if(!res.err){
                 dispatch({ type: TYPES.DELETE_DATA, payload: id });
                 setType("success");
-                setMessage("The registry was deleted correctly");
+                setMessage("El espacio fue eliminado con éxito");
                 setStatus(1);
             }else{
                 setType("danger");

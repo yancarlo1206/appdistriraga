@@ -74,7 +74,7 @@ const ClientesProvider = ({children}) => {
                 dispatch({ type: TYPES.CREATE_DATA, payload: res.data });
                 navigate('/admin/clientes/');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El cliente fue registrado con éxito");
                 setStatus(1);
             }else{
 
@@ -98,7 +98,7 @@ const ClientesProvider = ({children}) => {
                 dispatch({ type: TYPES.UPDATE_DATA, payload: res.data });
                 navigate('/admin/clientes');
                 setType("success");
-                setMessage("The registry was updated correctly");
+                setMessage("El cliente fue actualizado con éxito");
                 setStatus(1);
             }else{
 
@@ -118,7 +118,7 @@ const ClientesProvider = ({children}) => {
             if(!res.err){
                 dispatch({ type: TYPES.DELETE_DATA, payload: id });
                 setType("success");
-                setMessage("The registry was deleted correctly");
+                setMessage("El cliente fue eliminado con éxito");
                 setStatus(1);
             }else{
                 setType("danger");

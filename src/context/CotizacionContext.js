@@ -189,6 +189,8 @@ const CotizacionProvider = ({children}) => {
         };
 
         delete newData.id;
+        delete newData.edificio;
+        delete newData.fecha;
 
         let options = {
             body: newData,

@@ -2,14 +2,6 @@ export const validationsForm = (form) => {
     let errores = {};
     let regexText40 = /^.{1,40}$/;
 
-    if (!form.fecha) {
-        errores.fecha = "Please the field is required.";
-    } else if (!regexText40.test(form.fecha.trim())) {
-        errores.fecha = "The field accepts up to 40 characters.";
-    } else{
-        errores.fecha = "";
-    }
-
     if (!form.cliente) {
         errores.cliente = "Please the field is required.";
     } else{
@@ -30,8 +22,6 @@ export const validationsForm = (form) => {
 
     if (!form.precio) {
         errores.precio = "Please the field is required.";
-    } else if (!regexText40.test(form.precio.trim())) {
-        errores.precio = "The field accepts up to 40 characters.";
     } else{
         errores.precio = "";
     }
