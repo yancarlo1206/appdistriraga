@@ -15,6 +15,9 @@ const ApartamentosProvider = ({children}) => {
     const [detail, setDetail] = useState({});
     const [module, setModule] = useState();
 
+    const [edificio, setEdificio] = useState([]);
+    const [estadoApartamento, setEstadoApartamento] = useState([{"id":"1","text":"ACTIVO"},{"id":"0","text":"INACTIVO"}]);
+
     const navigate = useNavigate();
     const { REACT_APP_API_URL } = process.env;
 
@@ -37,6 +40,12 @@ const ApartamentosProvider = ({children}) => {
         }
     },[toUpdate]);
 
+    useEffect(() => {
+        if(module){
+            fetchDataEdificio();
+        }
+    },[module]);
+
     const fetchData = () => {
         setLoading(true);
          api.get(url).then((res) => {
@@ -53,8 +62,20 @@ const ApartamentosProvider = ({children}) => {
         setLoading(true);
         url = url+"/"+toUpdate;
         api.get(url).then((res) => {
+            res.data['edificio'] = res.data.edificio?.id;
             setDetail(res.data);
             setLoading(false);
+        });
+    };
+
+    const fetchDataEdificio = () => {
+        let urlFetch = REACT_APP_API_URL+"edificio";
+        api.get(urlFetch).then((res) => {
+            var data = res.data.map(function (obj) {
+                obj.text = obj.text || obj.nombre;
+                return obj;
+            });
+            setEdificio(data);
         });
     };
 
@@ -129,7 +150,7 @@ const ApartamentosProvider = ({children}) => {
 
     const data = { 
         db, detail, setToDetail, setToUpdate, updateData, saveData, deleteData, module, 
-        setModule, setDetail 
+        setModule, setDetail, edificio, setEdificio, estadoApartamento, setEstadoApartamento,
     };
 
     return <ApartamentosContext.Provider value={data}>{children}</ApartamentosContext.Provider>;
