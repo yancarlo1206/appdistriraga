@@ -26,6 +26,12 @@ export const validationsForm = (form) => {
         errores.correo = "";
     }
 
+    if (!form.estado) {
+        errores.estado = "Please select a state.";
+    } else {
+        errores.estado = "";
+    }
+
     return errores;
 };
 

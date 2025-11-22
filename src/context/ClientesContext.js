@@ -15,6 +15,8 @@ const ClientesProvider = ({children}) => {
     const [detail, setDetail] = useState({});
     const [module, setModule] = useState();
 
+    const [estadoCliente, setEstadoCliente] = useState([{"id":"1","text":"ACTIVO"},{"id":"0","text":"INACTIVO"}]);
+
     const navigate = useNavigate();
     const { REACT_APP_API_URL } = process.env;
 
@@ -25,11 +27,10 @@ const ClientesProvider = ({children}) => {
     const { db } = state;
 
     let api = helpHttp();
-    let url = REACT_APP_API_URL+"clientes";
+    let url = REACT_APP_API_URL+"cliente";
 
     useEffect(() => {
-        //fetchData();
-        fetchDataClientes();
+        fetchData();
     },[]);
 
     useEffect(() => {
@@ -37,35 +38,6 @@ const ClientesProvider = ({children}) => {
             fetchDataDetail();
         }
     },[toUpdate]);
-
-    const fetchDataClientes = () => {
-        setLoading(true);
-
-        let data = [
-  {
-    id: 1,
-    nombre: "Carlos Pérez",
-    celular: "3004567890",
-    correo: "carlos.perez@email.com"
-  },
-  {
-    id: 2,
-    nombre: "María Gómez",
-    celular: "3109876543",
-    correo: "maria.gomez@email.com"
-  },
-  {
-    id: 3,
-    nombre: "Andrés Rodríguez",
-    celular: "3012345678",
-    correo: "andres.rodriguez@email.com"
-  }
-];
-
-
-        dispatch({ type: TYPES.READ_ALL_DATA, payload: data });
-        setLoading(false);
-    };
 
     const fetchData = () => {
         setLoading(true);
@@ -159,7 +131,7 @@ const ClientesProvider = ({children}) => {
 
     const data = { 
         db, detail, setToDetail, setToUpdate, updateData, saveData, deleteData, module, 
-        setModule, setDetail 
+        setModule, setDetail, estadoCliente
     };
 
     return <ClientesContext.Provider value={data}>{children}</ClientesContext.Provider>;

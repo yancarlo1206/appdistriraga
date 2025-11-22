@@ -11,13 +11,14 @@ const initialForm = {
     nombre: "",
     celular: "",
     correo: "",
+    estado: ""
 };
 
 const Formulario = ( ) => {
 
     const { 
         detail:data, updateData, saveData, setModule, module, setToDetail,setDetail, 
-        setToUpdate
+        setToUpdate, estadoCliente
     } = useContext(ClientesContext);
 
     const {
@@ -88,7 +89,7 @@ const Formulario = ( ) => {
                         <Form>
                             <div className="pl-lg-4">
                             <Row>
-                                <Col lg="12">
+                                <Col lg="6">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
@@ -113,7 +114,7 @@ const Formulario = ( ) => {
                                         </div>
                                     </FormGroup>
                                 </Col>
-                                <Col lg="12">
+                                <Col lg="6">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
@@ -138,7 +139,7 @@ const Formulario = ( ) => {
                                         </div>
                                     </FormGroup>
                                 </Col>
-                                <Col lg="12">
+                                <Col lg="6">
                                     <FormGroup>
                                         <label
                                         className="form-control-label"
@@ -160,6 +161,36 @@ const Formulario = ( ) => {
                                         />
                                         <div className="invalid-feedback">
                                             {errors.correo}
+                                        </div>
+                                    </FormGroup>
+                                </Col>
+                                <Col lg="6">
+                                    <FormGroup>
+                                        <label
+                                        className="form-control-label"
+                                        htmlFor="input-estado"
+                                        >
+                                        Estado <span className="text-danger">*</span>
+                                        </label>
+                                        <Input 
+                                            className="form-control"
+                                            id="input-estado"
+                                            type="select"
+                                            name="estado"
+                                            value={form.estado}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={errors.estado !== ""}
+                                            >
+                                            <option value="" hidden></option>
+                                            {estadoCliente.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.text}
+                                                </option>
+                                            ))};
+                                        </Input>
+                                        <div className="invalid-feedback">
+                                            {errors.estado}
                                         </div>
                                     </FormGroup>
                                 </Col>
